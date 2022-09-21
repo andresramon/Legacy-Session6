@@ -19,9 +19,9 @@ Cuando el rover acabe de ejecutar las instrucciones, transmite su posición fina
 
 ## Reglas
 
-TDD sin excusas. Ciclo Red, Green, Refactor y al final de cada ciclo, commit.
-Evitar el rojo mientras se refactoriza, usando cuando sea posible los refactors del IDE.
-El vehículo no debe salir de la cuadrícula.
+- TDD sin excusas. Ciclo Red, Green, Refactor y al final de cada ciclo, commit.
+- Evitar el rojo mientras se refactoriza, usando cuando sea posible los refactors del IDE.
+- El vehículo no debe salir de la cuadrícula.
 
 ## Input
 
