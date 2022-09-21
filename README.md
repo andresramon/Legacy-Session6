@@ -1,4 +1,6 @@
-Vehículo Explorador de la Agencia Espacial Europea (ESA)
+# Vehículo Explorador de la Agencia Espacial Europea (ESA)
+
+## Descripción
 
 Un vehículo explorador de la ESA va a ser transportado a un valle de Marte.
 
@@ -15,13 +17,13 @@ Asumimos que la posición al norte de una posición x,y es x,y+1.
 
 Cuando el rover acabe de ejecutar las instrucciones, transmite su posición final.
 
-Reglas:
+## Reglas
 
 TDD sin excusas. Ciclo Red, Green, Refactor y al final de cada ciclo, commit.
 Evitar el rojo mientras se refactoriza, usando cuando sea posible los refactors del IDE.
 El vehículo no debe salir de la cuadrícula.
 
-Input:
+## Input
 
 La primera línea son las coordenadas del margen superior derecho (tamaño de la cuadrícula), la segunda línea nos indica la posición actual del vehículo y la tercera línea son las instrucciones de movimiento.
 
