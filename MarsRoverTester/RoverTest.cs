@@ -16,6 +16,15 @@ namespace MarsRoverTester
             MarsRover rover = new MarsRover(iniX, iniY, iniOrientation);
             Assert.AreEqual(expectedPosition, rover.moveAhead());
         }
+        
+        [TestCase(1,0,'S', "1 0 S")]
+        [TestCase(0,1,'O', "0 1 O")]
+        public void GivenTheRoverIsInTheLimitWhenMovingAheadWillStayAtSamePosition(int iniX, int iniY, char iniOrientation, string expectedPosition)
+        {
+            MarsRover rover = new MarsRover(iniX, iniY, iniOrientation);
+            Assert.AreEqual(expectedPosition, rover.moveAhead());
+        }
+        
     }
 
     public class MarsRover
@@ -39,13 +48,15 @@ namespace MarsRoverTester
                     _iniY++;
                     break;
                 case 'S':
-                    _iniY--;
+                    if(_iniY > 0)
+                        _iniY--;
                     break;
                 case 'E':
                     _iniX++;
                     break;
                 case 'O':
-                    _iniX--;
+                    if(_iniX > 0)
+                        _iniX--;
                     break;
             }
             return $"{_iniX} {_iniY} {_iniOrientation}";
