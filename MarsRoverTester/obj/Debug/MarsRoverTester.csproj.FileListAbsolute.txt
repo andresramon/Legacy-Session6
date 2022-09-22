@@ -1,0 +1,9 @@
+C:\Users\alvarezf\RiderProjects\Legacy-Session6\MarsRoverTester\bin\Debug\MarsRoverTester.dll
+C:\Users\alvarezf\RiderProjects\Legacy-Session6\MarsRoverTester\bin\Debug\MarsRoverTester.pdb
+C:\Users\alvarezf\RiderProjects\Legacy-Session6\MarsRoverTester\bin\Debug\nunit.framework.dll
+C:\Users\alvarezf\RiderProjects\Legacy-Session6\MarsRoverTester\bin\Debug\nunit.framework.xml
+C:\Users\alvarezf\RiderProjects\Legacy-Session6\MarsRoverTester\obj\Debug\MarsRoverTester.csproj.AssemblyReference.cache
+C:\Users\alvarezf\RiderProjects\Legacy-Session6\MarsRoverTester\obj\Debug\MarsRoverTester.csproj.CoreCompileInputs.cache
+C:\Users\alvarezf\RiderProjects\Legacy-Session6\MarsRoverTester\obj\Debug\MarsRoverTester.csproj.CopyComplete
+C:\Users\alvarezf\RiderProjects\Legacy-Session6\MarsRoverTester\obj\Debug\MarsRoverTester.dll
+C:\Users\alvarezf\RiderProjects\Legacy-Session6\MarsRoverTester\obj\Debug\MarsRoverTester.pdb
