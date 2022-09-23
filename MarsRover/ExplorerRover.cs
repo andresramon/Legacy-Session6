@@ -2,16 +2,14 @@
 {
     public class ExplorerRover
     {
-        private int _iniX;
-        private int _iniY;
         private readonly CardinalPoint _iniOrientation;
         private readonly Map _map;
+        private Point point;
 
-        public ExplorerRover(int iniX, int iniY, CardinalPoint iniOrientation, Map map)
+        public ExplorerRover(Point initialPoint, CardinalPoint iniOrientation, Map map)
         {
-            _iniX = iniX;
-            _iniY = iniY;
             _iniOrientation = iniOrientation;
+            point = initialPoint;
             _map = map;
         }
 
@@ -20,23 +18,31 @@
             switch (_iniOrientation)
             {
                 case CardinalPoint.Norte:
-                    if(_iniY<_map._maxY)
-                        _iniY++;
+                    if (IsNotLimitNorth())
+                    {
+                        point.Y++;
+                    }
                     break;
                 case CardinalPoint.Sur:
-                    if(_iniY > 0)
-                        _iniY--;
+                    if (IsNotLimitSouth())
+                    {
+                        point.Y--;
+                    }
                     break;
                 case CardinalPoint.Este:
-                    if(_iniX<_map._maxX)
-                        _iniX++;
+                    if (IsNotLimitEast())
+                    {
+                        point.X++;
+                    }
                     break;
                 case CardinalPoint.Oeste:
-                    if(_iniX > 0)
-                        _iniX--;
+                    if (IsNotLimitWest())
+                    {
+                        point.X--;
+                    }
                     break;
             }
-            return $"{_iniX} {_iniY} {(char)_iniOrientation}";
+            return PrintPosition();
         }
 
         public string moveRear()
@@ -44,23 +50,56 @@
             switch (_iniOrientation)
             {
                 case CardinalPoint.Norte:
-                    if (_iniY > 0)
-                        _iniY--;
+                    if (IsNotLimitSouth())
+                    {
+                        point.Y--;
+                    }
                     break;
                 case CardinalPoint.Sur:
-                    if (_iniY < _map._maxY)
-                        _iniY++;
+                    if (IsNotLimitNorth())
+                    {
+                        point.Y++;
+                    }
                     break;
                 case CardinalPoint.Este:
-                    if (_iniX > 0 )
-                        _iniX--;
+                    if (IsNotLimitWest())
+                    {
+                        point.X--;
+                    }
                     break;
                 case CardinalPoint.Oeste:
-                    if (_iniX < _map._maxX)
-                        _iniX++;
+                    if (IsNotLimitEast())
+                    {
+                        point.X++;
+                    }
                     break;
             }
-            return $"{_iniX} {_iniY} {(char)_iniOrientation}";
+            return PrintPosition();
+        }
+
+        private bool IsNotLimitEast()
+        {
+            return point.X < _map._maxX;
+        }
+
+        private bool IsNotLimitWest()
+        {
+            return point.X > 0;
+        }
+
+        private bool IsNotLimitNorth()
+        {
+            return point.Y < _map._maxY;
+        }
+
+        private bool IsNotLimitSouth()
+        {
+            return point.Y > 0;
+        }
+
+        private string PrintPosition()
+        {
+            return $"{point.X} {point.Y} {(char)_iniOrientation}";
         }
     }
 }
