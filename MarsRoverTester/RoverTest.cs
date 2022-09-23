@@ -31,7 +31,28 @@ namespace MarsRoverTester
             MarsRover rover = new MarsRover(iniX, iniY, iniOrientation, map);
             Assert.AreEqual(expectedPosition, rover.moveAhead());
         }
-        
+
+        [TestCase(1, 1, 'N', "1 0 N")]
+        [TestCase(1, 1, 'S', "1 2 S")]
+        [TestCase(1, 1, 'E', "0 1 E")]
+        [TestCase(1, 1, 'O', "2 1 O")]
+        public void MovementRear(int iniX, int iniY, char iniOrientation, string expectedPosition)
+        {
+            Map map = new Map(2, 3);
+            MarsRover rover = new MarsRover(iniX, iniY, iniOrientation, map);
+            Assert.AreEqual(expectedPosition, rover.moveRear());
+        }
+
+        [TestCase(1, 0, 'N', "1 0 N")]
+        [TestCase(0, 1, 'E', "0 1 E")]
+        [TestCase(0, 3, 'S', "0 3 S")]
+        [TestCase(2, 0, 'O', "2 0 O")]
+        public void GivenTheRoverIsInTheLimitWhenMovingRearWillStayAtSamePosition(int iniX, int iniY, char iniOrientation, string expectedPosition)
+        {
+            Map map = new Map(2, 3);
+            MarsRover rover = new MarsRover(iniX, iniY, iniOrientation, map);
+            Assert.AreEqual(expectedPosition, rover.moveRear());
+        }
     }
 
     public class Map
@@ -82,6 +103,30 @@ namespace MarsRoverTester
                 case 'O':
                     if(_iniX > 0)
                         _iniX--;
+                    break;
+            }
+            return $"{_iniX} {_iniY} {_iniOrientation}";
+        }
+
+        public string moveRear()
+        {
+            switch (_iniOrientation)
+            {
+                case 'N':
+                    if (_iniY > 0)
+                        _iniY--;
+                    break;
+                case 'S':
+                    if (_iniY < _map._maxY)
+                        _iniY++;
+                    break;
+                case 'E':
+                    if (_iniX > 0 )
+                        _iniX--;
+                    break;
+                case 'O':
+                    if (_iniX < _map._maxX)
+                        _iniX++;
                     break;
             }
             return $"{_iniX} {_iniY} {_iniOrientation}";
