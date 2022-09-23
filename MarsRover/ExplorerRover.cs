@@ -4,10 +4,10 @@
     {
         private int _iniX;
         private int _iniY;
-        private readonly char _iniOrientation;
+        private readonly CardinalPoint _iniOrientation;
         private readonly Map _map;
 
-        public ExplorerRover(int iniX, int iniY, char iniOrientation, Map map)
+        public ExplorerRover(int iniX, int iniY, CardinalPoint iniOrientation, Map map)
         {
             _iniX = iniX;
             _iniY = iniY;
@@ -19,48 +19,48 @@
         {
             switch (_iniOrientation)
             {
-                case 'N':
+                case CardinalPoint.Norte:
                     if(_iniY<_map._maxY)
                         _iniY++;
                     break;
-                case 'S':
+                case CardinalPoint.Sur:
                     if(_iniY > 0)
                         _iniY--;
                     break;
-                case 'E':
+                case CardinalPoint.Este:
                     if(_iniX<_map._maxX)
                         _iniX++;
                     break;
-                case 'O':
+                case CardinalPoint.Oeste:
                     if(_iniX > 0)
                         _iniX--;
                     break;
             }
-            return $"{_iniX} {_iniY} {_iniOrientation}";
+            return $"{_iniX} {_iniY} {(char)_iniOrientation}";
         }
 
         public string moveRear()
         {
             switch (_iniOrientation)
             {
-                case 'N':
+                case CardinalPoint.Norte:
                     if (_iniY > 0)
                         _iniY--;
                     break;
-                case 'S':
+                case CardinalPoint.Sur:
                     if (_iniY < _map._maxY)
                         _iniY++;
                     break;
-                case 'E':
+                case CardinalPoint.Este:
                     if (_iniX > 0 )
                         _iniX--;
                     break;
-                case 'O':
+                case CardinalPoint.Oeste:
                     if (_iniX < _map._maxX)
                         _iniX++;
                     break;
             }
-            return $"{_iniX} {_iniY} {_iniOrientation}";
+            return $"{_iniX} {_iniY} {(char)_iniOrientation}";
         }
     }
 }
