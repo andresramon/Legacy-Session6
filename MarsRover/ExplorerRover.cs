@@ -18,28 +18,16 @@
             switch (_iniOrientation)
             {
                 case CardinalPoint.Norte:
-                    if (IsNotLimitNorth())
-                    {
-                        point.Y++;
-                    }
+                    TryMoveNorth();
                     break;
                 case CardinalPoint.Sur:
-                    if (IsNotLimitSouth())
-                    {
-                        point.Y--;
-                    }
+                    TryMoveSouth();
                     break;
                 case CardinalPoint.Este:
-                    if (IsNotLimitEast())
-                    {
-                        point.X++;
-                    }
+                    TryMoveEast();
                     break;
                 case CardinalPoint.Oeste:
-                    if (IsNotLimitWest())
-                    {
-                        point.X--;
-                    }
+                    TryMoveWest();
                     break;
             }
             return PrintPosition();
@@ -50,31 +38,51 @@
             switch (_iniOrientation)
             {
                 case CardinalPoint.Norte:
-                    if (IsNotLimitSouth())
-                    {
-                        point.Y--;
-                    }
+                    TryMoveSouth();
                     break;
                 case CardinalPoint.Sur:
-                    if (IsNotLimitNorth())
-                    {
-                        point.Y++;
-                    }
+                    TryMoveNorth();
                     break;
                 case CardinalPoint.Este:
-                    if (IsNotLimitWest())
-                    {
-                        point.X--;
-                    }
+                    TryMoveWest();
                     break;
                 case CardinalPoint.Oeste:
-                    if (IsNotLimitEast())
-                    {
-                        point.X++;
-                    }
+                    TryMoveEast();
                     break;
             }
             return PrintPosition();
+        }
+
+        private void TryMoveEast()
+        {
+            if (IsNotLimitEast())
+            {
+                point.X++;
+            }
+        }
+
+        private void TryMoveWest()
+        {
+            if (IsNotLimitWest())
+            {
+                point.X--;
+            }
+        }
+
+        private void TryMoveNorth()
+        {
+            if (IsNotLimitNorth())
+            {
+                point.Y++;
+            }
+        }
+
+        private void TryMoveSouth()
+        {
+            if (IsNotLimitSouth())
+            {
+                point.Y--;
+            }
         }
 
         private bool IsNotLimitEast()

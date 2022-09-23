@@ -9,7 +9,6 @@
         {
             _maxX = maxX;
             _maxY = maxY;
-            
         }
     }
 }
