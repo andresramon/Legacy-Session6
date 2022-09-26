@@ -55,7 +55,7 @@
 
         private void TryMoveEast()
         {
-            if (IsNotLimitEast())
+            if (_map.IsNotLimitEast(point.X))
             {
                 point.X++;
             }
@@ -63,7 +63,7 @@
 
         private void TryMoveWest()
         {
-            if (IsNotLimitWest())
+            if (_map.IsNotLimitWest(point.X))
             {
                 point.X--;
             }
@@ -71,7 +71,7 @@
 
         private void TryMoveNorth()
         {
-            if (IsNotLimitNorth())
+            if (_map.IsNotLimitNorth(point.Y))
             {
                 point.Y++;
             }
@@ -79,30 +79,10 @@
 
         private void TryMoveSouth()
         {
-            if (IsNotLimitSouth())
+            if (_map.IsNotLimitSouth(point.Y))
             {
                 point.Y--;
             }
-        }
-
-        private bool IsNotLimitEast()
-        {
-            return point.X < _map._maxX;
-        }
-
-        private bool IsNotLimitWest()
-        {
-            return point.X > 0;
-        }
-
-        private bool IsNotLimitNorth()
-        {
-            return point.Y < _map._maxY;
-        }
-
-        private bool IsNotLimitSouth()
-        {
-            return point.Y > 0;
         }
 
         private string PrintPosition()
