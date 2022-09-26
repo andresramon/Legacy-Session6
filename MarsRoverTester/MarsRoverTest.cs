@@ -48,6 +48,28 @@ namespace MarsRoverTester
             Assert.AreEqual(expectedPosition, rover.moveRear());
         }
 
+        [TestCase(CardinalPoint.Norte, "0 0 O")]
+        [TestCase(CardinalPoint.Oeste, "0 0 S")]
+        [TestCase(CardinalPoint.Sur, "0 0 E")]
+        [TestCase(CardinalPoint.Este, "0 0 N")]
+        public void RotateToLeft(CardinalPoint iniOrientation, string expectedPosition)
+        {
+            ExplorerRover rover = InitializeExplorer(0, 0, iniOrientation);
+
+            Assert.AreEqual(expectedPosition, rover.RotateLeft());
+        }
+
+        [TestCase(CardinalPoint.Norte, "0 0 E")]
+        [TestCase(CardinalPoint.Oeste, "0 0 N")]
+        [TestCase(CardinalPoint.Sur, "0 0 O")]
+        [TestCase(CardinalPoint.Este, "0 0 S")]
+        public void RotateToRight(CardinalPoint iniOrientation, string expectedPosition)
+        {
+            ExplorerRover rover = InitializeExplorer(0, 0, iniOrientation);
+
+            Assert.AreEqual(expectedPosition, rover.RotateRight());
+        }
+
 
         private static ExplorerRover InitializeExplorer(int iniX, int iniY, CardinalPoint iniOrientation)
         {
