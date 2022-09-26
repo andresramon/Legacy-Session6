@@ -1,21 +1,23 @@
-﻿namespace MarsRover
+﻿using System;
+
+namespace MarsRover
 {
     public class ExplorerRover
     {
-        private readonly CardinalPoint _iniOrientation;
+        private CardinalPoint currentOrientation;
         private readonly Map _map;
         private Point point;
 
         public ExplorerRover(Point initialPoint, CardinalPoint iniOrientation, Map map)
         {
-            _iniOrientation = iniOrientation;
+            currentOrientation = iniOrientation;
             point = initialPoint;
             _map = map;
         }
 
         public string moveAhead()
         {
-            switch (_iniOrientation)
+            switch (currentOrientation)
             {
                 case CardinalPoint.Norte:
                     TryMoveNorth();
@@ -35,7 +37,7 @@
 
         public string moveRear()
         {
-            switch (_iniOrientation)
+            switch (currentOrientation)
             {
                 case CardinalPoint.Norte:
                     TryMoveSouth();
@@ -69,6 +71,7 @@
             }
         }
 
+
         private void TryMoveNorth()
         {
             if (_map.IsNotLimitNorth(point.Y))
@@ -87,7 +90,47 @@
 
         private string PrintPosition()
         {
-            return $"{point.X} {point.Y} {(char)_iniOrientation}";
+            return $"{point.X} {point.Y} {(char)currentOrientation}";
+        }
+
+        public string RotateLeft()
+        {
+            switch (currentOrientation)
+            {
+                case CardinalPoint.Norte:
+                    currentOrientation = CardinalPoint.Oeste;
+                    break;
+                case CardinalPoint.Sur:
+                    currentOrientation = CardinalPoint.Este;
+                    break;
+                case CardinalPoint.Este:
+                    currentOrientation = CardinalPoint.Norte;
+                    break;
+                case CardinalPoint.Oeste:
+                    currentOrientation = CardinalPoint.Sur;
+                    break;
+            }
+            return PrintPosition();
+        }
+
+        public string RotateRight()
+        {
+            switch (currentOrientation)
+            {
+                case CardinalPoint.Norte:
+                    currentOrientation = CardinalPoint.Este;
+                    break;
+                case CardinalPoint.Sur:
+                    currentOrientation = CardinalPoint.Oeste;
+                    break;
+                case CardinalPoint.Este:
+                    currentOrientation = CardinalPoint.Sur;
+                    break;
+                case CardinalPoint.Oeste:
+                    currentOrientation = CardinalPoint.Norte;
+                    break;
+            }
+            return PrintPosition();
         }
     }
 }
