@@ -69,6 +69,14 @@ namespace MarsRoverTester
 
             Assert.AreEqual(expectedPosition, rover.RotateRight());
         }
+        
+        [TestCase("5 5\n0 1 N\nA\n", "0 2 N")]
+        [TestCase("5 5\n0 1 N\nAADADRIA\n", "2 4 E")]
+        public void OrderToRover(string order, string expectedPosition)
+        {
+            ExplorerRover rover = new ExplorerRover();
+            Assert.AreEqual(expectedPosition, rover.processCommand(order));
+        }
 
 
         private static ExplorerRover InitializeExplorer(int iniX, int iniY, CardinalPoint iniOrientation)

@@ -1,18 +1,81 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace MarsRover
 {
     public class ExplorerRover
     {
         private CardinalPoint currentOrientation;
-        private readonly Map _map;
+        private Map _map;
         private Point point;
+        private Dictionary<string, CardinalPoint> cardinalDictionary= new Dictionary<string, CardinalPoint>() {
+            {
+                "N",CardinalPoint.Norte   
+            },
+            {
+                "S",CardinalPoint.Sur   
+            },
+            {
+                "O",CardinalPoint.Oeste   
+            },
+            {
+                "E",CardinalPoint.Este   
+            }
+        };
 
+        public ExplorerRover()
+        {
+            
+        }
         public ExplorerRover(Point initialPoint, CardinalPoint iniOrientation, Map map)
         {
             currentOrientation = iniOrientation;
             point = initialPoint;
             _map = map;
+        }
+
+        public string processCommand(string command)
+        {
+            string[] inputLines = command.Split('\n');
+            createMap(inputLines[0]);
+            setInitialPositionOrientation(inputLines[1]);
+            processMovement(inputLines[2]);
+            
+            return PrintPosition();
+        }
+
+        private void processMovement(string movements)
+        {
+            foreach (char singleMove in movements)
+            {
+                switch (singleMove)
+                {
+                    case 'A':
+                        moveAhead();
+                        break;
+                    case 'D':
+                        RotateRight();
+                        break;
+                    case 'R':
+                        moveRear();
+                        break;
+                    case 'I':
+                        RotateLeft();
+                        break;
+                }
+            }
+        }
+        private void createMap(string dimensionMap)
+        {
+            string[] inputDimensions = dimensionMap.Split(' ');
+            _map = new Map(int.Parse(inputDimensions[0]), int.Parse(inputDimensions[1]));
+        }
+
+        private void setInitialPositionOrientation(string initialPositionOrientation)
+        {
+            string[] inputPositionOrientation = initialPositionOrientation.Split(' ');
+            point = new Point(int.Parse(inputPositionOrientation[0]), int.Parse(inputPositionOrientation[1]));
+            cardinalDictionary.TryGetValue(inputPositionOrientation[2], out currentOrientation);
         }
 
         public string moveAhead()
