@@ -6,6 +6,27 @@
         {
             return CardinalPoint.Sur;
         }
+
+        public Point TryMoveAhead(Map map, Point point)
+        {
+            if (map.IsNotLimitSouth(point.Y))
+            {
+                point.Y--;
+            }
+
+            return point;
+        }
+
+        public Point TryMoveRear(Map map, Point point)
+        {
+            if (map.IsNotLimitNorth(point.Y))
+            {
+                point.Y++;
+            }
+
+            return point;
+        }
+
         public ICardinal RotateLeft()
         {
             return new Este();

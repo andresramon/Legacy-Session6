@@ -4,22 +4,30 @@ namespace MarsRover
 {
     public class Norte : ICardinal
     {
-        // public string moveAhead()
-        // {
-        //     if (_map.IsNotLimitNorth(point.Y))
-        //     {
-        //         point.Y++;
-        //     }
-        //     return "";
-        // }
-        //
-        // public string moveRear()
-        // {
-        //     return "";
-        // }
+        
         public CardinalPoint GetOrientation()
         {
             return CardinalPoint.Norte;
+        }
+
+        public Point TryMoveAhead(Map map, Point point)
+        {
+            if (map.IsNotLimitNorth(point.Y))
+            {
+                point.Y++;
+            }
+
+            return point;
+        }
+
+        public Point TryMoveRear(Map map, Point point)
+        {
+            if (map.IsNotLimitSouth(point.Y))
+            {
+                point.Y--;
+            }
+
+            return point;
         }
 
         public ICardinal RotateLeft()

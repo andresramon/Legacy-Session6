@@ -99,42 +99,15 @@ namespace MarsRover
 
         public string MoveAhead()
         {
+            currentOrientationState.TryMoveAhead(_map,point);
             
-            switch (currentOrientationState.GetOrientation())
-            {
-                case CardinalPoint.Norte:
-                    TryMoveNorth();
-                    break;
-                case CardinalPoint.Sur:
-                    TryMoveSouth();
-                    break;
-                case CardinalPoint.Este:
-                    TryMoveEast();
-                    break;
-                case CardinalPoint.Oeste:
-                    TryMoveWest();
-                    break;
-            }
             return PrintPosition();
         }
 
         public string MoveRear()
         {
-            switch (currentOrientationState.GetOrientation())
-            {
-                case CardinalPoint.Norte:
-                    TryMoveSouth();
-                    break;
-                case CardinalPoint.Sur:
-                    TryMoveNorth();
-                    break;
-                case CardinalPoint.Este:
-                    TryMoveWest();
-                    break;
-                case CardinalPoint.Oeste:
-                    TryMoveEast();
-                    break;
-            }
+            point = currentOrientationState.TryMoveRear(_map,point);
+            
             return PrintPosition();
         }
 
