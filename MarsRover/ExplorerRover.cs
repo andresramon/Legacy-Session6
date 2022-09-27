@@ -6,8 +6,7 @@ namespace MarsRover
     public class ExplorerRover 
     {
         private ICardinal currentOrientationState;
-        private CardinalPoint currentOrientation;
-        private Map _map;
+        private Map map;
         private Point point;
         private Dictionary<string, CardinalPoint> cardinalDictionary= new Dictionary<string, CardinalPoint>() {
             {
@@ -30,10 +29,9 @@ namespace MarsRover
         }
         public ExplorerRover(Point initialPoint, CardinalPoint iniOrientation, Map map)
         {
-            currentOrientation = iniOrientation;
             currentOrientationState = GetCardinal(iniOrientation);
             point = initialPoint;
-            _map = map;
+            this.map = map;
         }
 
         private ICardinal GetCardinal(CardinalPoint cardinalPoint)
@@ -55,14 +53,14 @@ namespace MarsRover
         public string ProcessCommand(string command)
         {
             string[] inputLines = command.Split('\n');
-            createMap(inputLines[0]);
-            setInitialPositionOrientation(inputLines[1]);
-            processMovement(inputLines[2]);
+            map = Map.CreateMapFromDimension(inputLines[0]);
+            SetInitialPositionOrientation(inputLines[1]);
+            ProcessMovement(inputLines[2]);
             
             return PrintPosition();
         }
 
-        private void processMovement(string movements)
+        private void ProcessMovement(string movements)
         {
             foreach (char singleMove in movements)
             {
@@ -83,67 +81,29 @@ namespace MarsRover
                 }
             }
         }
-        private void createMap(string dimensionMap)
-        {
-            string[] inputDimensions = dimensionMap.Split(' ');
-            _map = new Map(int.Parse(inputDimensions[0]), int.Parse(inputDimensions[1]));
-        }
 
-        private void setInitialPositionOrientation(string initialPositionOrientation)
+        private void SetInitialPositionOrientation(string initialPositionOrientation)
         {
             string[] inputPositionOrientation = initialPositionOrientation.Split(' ');
             point = new Point(int.Parse(inputPositionOrientation[0]), int.Parse(inputPositionOrientation[1]));
-            cardinalDictionary.TryGetValue(inputPositionOrientation[2], out currentOrientation);
+            cardinalDictionary.TryGetValue(inputPositionOrientation[2], out CardinalPoint currentOrientation);
             currentOrientationState = GetCardinal(currentOrientation);
         }
 
         public string MoveAhead()
         {
-            currentOrientationState.TryMoveAhead(_map,point);
+            currentOrientationState.TryMoveAhead(map,point);
             
             return PrintPosition();
         }
 
         public string MoveRear()
         {
-            point = currentOrientationState.TryMoveRear(_map,point);
+            point = currentOrientationState.TryMoveRear(map,point);
             
             return PrintPosition();
         }
-
-        private void TryMoveEast()
-        {
-            if (_map.IsNotLimitEast(point.X))
-            {
-                point.X++;
-            }
-        }
-
-        private void TryMoveWest()
-        {
-            if (_map.IsNotLimitWest(point.X))
-            {
-                point.X--;
-            }
-        }
-
-
-        private void TryMoveNorth()
-        {
-            if (_map.IsNotLimitNorth(point.Y))
-            {
-                point.Y++;
-            }
-        }
-
-        private void TryMoveSouth()
-        {
-            if (_map.IsNotLimitSouth(point.Y))
-            {
-                point.Y--;
-            }
-        }
-
+        
         private string PrintPosition()
         {
             return $"{point.X} {point.Y} {(char)currentOrientationState.GetOrientation()}";

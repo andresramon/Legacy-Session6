@@ -30,5 +30,11 @@
         {
             return y > 0;
         }
+
+        public static Map CreateMapFromDimension(string dimensionMap)
+        {
+            string[] inputDimensions = dimensionMap.Split(' ');
+            return new Map(int.Parse(inputDimensions[0]), int.Parse(inputDimensions[1]));
+        }
     }
 }
