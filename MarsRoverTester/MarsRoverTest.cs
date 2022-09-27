@@ -15,7 +15,7 @@ namespace MarsRoverTester
         public void MovementAhead(int iniX, int iniY, CardinalPoint iniOrientation, string expectedPosition)
         {
             ExplorerRover rover = InitializeExplorer(iniX, iniY, iniOrientation);
-            Assert.AreEqual(expectedPosition, rover.moveAhead());
+            Assert.AreEqual(expectedPosition, rover.MoveAhead());
         }
 
         [TestCase(1,0,CardinalPoint.Sur, "1 0 S")]
@@ -25,7 +25,7 @@ namespace MarsRoverTester
         public void GivenTheRoverIsInTheLimitWhenMovingAheadWillStayAtSamePosition(int iniX, int iniY, CardinalPoint iniOrientation, string expectedPosition)
         {
             ExplorerRover rover = InitializeExplorer(iniX, iniY, iniOrientation);
-            Assert.AreEqual(expectedPosition, rover.moveAhead());
+            Assert.AreEqual(expectedPosition, rover.MoveAhead());
         }
 
         [TestCase(1, 1, CardinalPoint.Norte, "1 0 N")]
@@ -35,7 +35,7 @@ namespace MarsRoverTester
         public void MovementRear(int iniX, int iniY, CardinalPoint iniOrientation, string expectedPosition)
         {
             ExplorerRover rover = InitializeExplorer(iniX, iniY, iniOrientation);
-            Assert.AreEqual(expectedPosition, rover.moveRear());
+            Assert.AreEqual(expectedPosition, rover.MoveRear());
         }
 
         [TestCase(1, 0, CardinalPoint.Norte, "1 0 N")]
@@ -45,7 +45,7 @@ namespace MarsRoverTester
         public void GivenTheRoverIsInTheLimitWhenMovingRearWillStayAtSamePosition(int iniX, int iniY, CardinalPoint iniOrientation, string expectedPosition)
         {
             ExplorerRover rover = InitializeExplorer(iniX, iniY, iniOrientation);
-            Assert.AreEqual(expectedPosition, rover.moveRear());
+            Assert.AreEqual(expectedPosition, rover.MoveRear());
         }
 
         [TestCase(CardinalPoint.Norte, "0 0 O")]
@@ -75,7 +75,7 @@ namespace MarsRoverTester
         public void OrderToRover(string order, string expectedPosition)
         {
             ExplorerRover rover = new ExplorerRover();
-            Assert.AreEqual(expectedPosition, rover.processCommand(order));
+            Assert.AreEqual(expectedPosition, rover.ProcessCommand(order));
         }
 
 
