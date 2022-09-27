@@ -3,8 +3,9 @@ using System.Collections.Generic;
 
 namespace MarsRover
 {
-    public class ExplorerRover
+    public class ExplorerRover 
     {
+        private ICardinal currentOrientationState;
         private CardinalPoint currentOrientation;
         private Map _map;
         private Point point;
@@ -30,11 +31,28 @@ namespace MarsRover
         public ExplorerRover(Point initialPoint, CardinalPoint iniOrientation, Map map)
         {
             currentOrientation = iniOrientation;
+            currentOrientationState = GetCardinal(iniOrientation);
             point = initialPoint;
             _map = map;
         }
 
-        public string processCommand(string command)
+        private ICardinal GetCardinal(CardinalPoint cardinalPoint)
+        {
+            switch (cardinalPoint)
+            {
+                case CardinalPoint.Norte:
+                    return new Norte();
+                case CardinalPoint.Oeste:
+                    return new Oeste();
+                case CardinalPoint.Sur:
+                    return new Sur();
+                case CardinalPoint.Este:
+                    return new Este();
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(cardinalPoint), cardinalPoint, null);
+            }
+        }
+        public string ProcessCommand(string command)
         {
             string[] inputLines = command.Split('\n');
             createMap(inputLines[0]);
@@ -51,13 +69,13 @@ namespace MarsRover
                 switch (singleMove)
                 {
                     case 'A':
-                        moveAhead();
+                        MoveAhead();
                         break;
                     case 'D':
                         RotateRight();
                         break;
                     case 'R':
-                        moveRear();
+                        MoveRear();
                         break;
                     case 'I':
                         RotateLeft();
@@ -76,11 +94,13 @@ namespace MarsRover
             string[] inputPositionOrientation = initialPositionOrientation.Split(' ');
             point = new Point(int.Parse(inputPositionOrientation[0]), int.Parse(inputPositionOrientation[1]));
             cardinalDictionary.TryGetValue(inputPositionOrientation[2], out currentOrientation);
+            currentOrientationState = GetCardinal(currentOrientation);
         }
 
-        public string moveAhead()
+        public string MoveAhead()
         {
-            switch (currentOrientation)
+            
+            switch (currentOrientationState.GetOrientation())
             {
                 case CardinalPoint.Norte:
                     TryMoveNorth();
@@ -98,9 +118,9 @@ namespace MarsRover
             return PrintPosition();
         }
 
-        public string moveRear()
+        public string MoveRear()
         {
-            switch (currentOrientation)
+            switch (currentOrientationState.GetOrientation())
             {
                 case CardinalPoint.Norte:
                     TryMoveSouth();
@@ -153,46 +173,20 @@ namespace MarsRover
 
         private string PrintPosition()
         {
-            return $"{point.X} {point.Y} {(char)currentOrientation}";
+            return $"{point.X} {point.Y} {(char)currentOrientationState.GetOrientation()}";
         }
 
         public string RotateLeft()
         {
-            switch (currentOrientation)
-            {
-                case CardinalPoint.Norte:
-                    currentOrientation = CardinalPoint.Oeste;
-                    break;
-                case CardinalPoint.Sur:
-                    currentOrientation = CardinalPoint.Este;
-                    break;
-                case CardinalPoint.Este:
-                    currentOrientation = CardinalPoint.Norte;
-                    break;
-                case CardinalPoint.Oeste:
-                    currentOrientation = CardinalPoint.Sur;
-                    break;
-            }
+            currentOrientationState = currentOrientationState.RotateLeft();
+            
             return PrintPosition();
         }
 
         public string RotateRight()
         {
-            switch (currentOrientation)
-            {
-                case CardinalPoint.Norte:
-                    currentOrientation = CardinalPoint.Este;
-                    break;
-                case CardinalPoint.Sur:
-                    currentOrientation = CardinalPoint.Oeste;
-                    break;
-                case CardinalPoint.Este:
-                    currentOrientation = CardinalPoint.Sur;
-                    break;
-                case CardinalPoint.Oeste:
-                    currentOrientation = CardinalPoint.Norte;
-                    break;
-            }
+            currentOrientationState = currentOrientationState.RotateRight();
+           
             return PrintPosition();
         }
     }
