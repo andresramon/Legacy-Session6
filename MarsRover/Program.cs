@@ -4,9 +4,9 @@
     {
         public static void Main(string[] args)
         {
-            CardinalPoint a = CardinalPoint.Norte;
+            CardinalPointEnum a = CardinalPointEnum.Norte;
             char b = 'N';
-            CardinalPoint be = (CardinalPoint)b;
+            CardinalPointEnum be = (CardinalPointEnum)b;
 
         }
     }

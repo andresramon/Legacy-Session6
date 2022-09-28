@@ -40,15 +40,22 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CardinalPoint.cs" />
+    <Compile Include="CardinalPointEnum.cs" />
+    <Compile Include="CommandFactory.cs" />
     <Compile Include="Este.cs" />
     <Compile Include="ICardinal.cs" />
+    <Compile Include="ICommand.cs" />
     <Compile Include="Map.cs" />
     <Compile Include="ExplorerRover.cs" />
+    <Compile Include="MoveAhead.cs" />
+    <Compile Include="MoveRear.cs" />
     <Compile Include="Norte.cs" />
     <Compile Include="Oeste.cs" />
     <Compile Include="Point.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RotateLeft.cs" />
+    <Compile Include="RotateRight.cs" />
     <Compile Include="Sur.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -8,48 +8,23 @@ namespace MarsRover
         private ICardinal currentOrientationState;
         private Map map;
         private Point point;
-        private Dictionary<string, CardinalPoint> cardinalDictionary= new Dictionary<string, CardinalPoint>() {
-            {
-                "N",CardinalPoint.Norte   
-            },
-            {
-                "S",CardinalPoint.Sur   
-            },
-            {
-                "O",CardinalPoint.Oeste   
-            },
-            {
-                "E",CardinalPoint.Este   
-            }
-        };
+        private CommandFactory factory;
 
-        public ExplorerRover()
+        public ExplorerRover():this(CommandFactory.Instance)
         {
             
         }
-        public ExplorerRover(Point initialPoint, CardinalPoint iniOrientation, Map map)
+        public ExplorerRover(CommandFactory factory)
         {
-            currentOrientationState = GetCardinal(iniOrientation);
+            this.factory = factory;
+        }
+        public ExplorerRover(Point initialPoint, CardinalPointEnum iniOrientation, Map map)
+        {
+            currentOrientationState = CardinalPoint.GetCardinal(iniOrientation);
             point = initialPoint;
             this.map = map;
         }
 
-        private ICardinal GetCardinal(CardinalPoint cardinalPoint)
-        {
-            switch (cardinalPoint)
-            {
-                case CardinalPoint.Norte:
-                    return new Norte();
-                case CardinalPoint.Oeste:
-                    return new Oeste();
-                case CardinalPoint.Sur:
-                    return new Sur();
-                case CardinalPoint.Este:
-                    return new Este();
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(cardinalPoint), cardinalPoint, null);
-            }
-        }
         public string ProcessCommand(string command)
         {
             string[] inputLines = command.Split('\n');
@@ -64,21 +39,8 @@ namespace MarsRover
         {
             foreach (char singleMove in movements)
             {
-                switch (singleMove)
-                {
-                    case 'A':
-                        MoveAhead();
-                        break;
-                    case 'D':
-                        RotateRight();
-                        break;
-                    case 'R':
-                        MoveRear();
-                        break;
-                    case 'I':
-                        RotateLeft();
-                        break;
-                }
+                ICommand command = factory.GetCommand(singleMove.ToString(),this);
+                command.Execute();
             }
         }
 
@@ -86,21 +48,18 @@ namespace MarsRover
         {
             string[] inputPositionOrientation = initialPositionOrientation.Split(' ');
             point = new Point(int.Parse(inputPositionOrientation[0]), int.Parse(inputPositionOrientation[1]));
-            cardinalDictionary.TryGetValue(inputPositionOrientation[2], out CardinalPoint currentOrientation);
-            currentOrientationState = GetCardinal(currentOrientation);
+            currentOrientationState = CardinalPoint.GetCardinalFromString(inputPositionOrientation[2]);
         }
 
         public string MoveAhead()
         {
             currentOrientationState.TryMoveAhead(map,point);
-            
             return PrintPosition();
         }
 
         public string MoveRear()
         {
             point = currentOrientationState.TryMoveRear(map,point);
-            
             return PrintPosition();
         }
         
@@ -112,14 +71,12 @@ namespace MarsRover
         public string RotateLeft()
         {
             currentOrientationState = currentOrientationState.RotateLeft();
-            
             return PrintPosition();
         }
 
         public string RotateRight()
         {
             currentOrientationState = currentOrientationState.RotateRight();
-           
             return PrintPosition();
         }
     }

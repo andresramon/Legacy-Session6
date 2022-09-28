@@ -5,9 +5,9 @@ namespace MarsRover
     public class Norte : ICardinal
     {
         
-        public CardinalPoint GetOrientation()
+        public CardinalPointEnum GetOrientation()
         {
-            return CardinalPoint.Norte;
+            return CardinalPointEnum.Norte;
         }
 
         public Point TryMoveAhead(Map map, Point point)

@@ -7,7 +7,7 @@
         ICardinal RotateLeft();
         ICardinal RotateRight();
 
-        CardinalPoint GetOrientation();
+        CardinalPointEnum GetOrientation();
         
         
     }

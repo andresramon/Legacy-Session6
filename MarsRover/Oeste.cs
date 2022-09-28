@@ -2,9 +2,9 @@
 {
     public class Oeste : ICardinal
     {
-        public CardinalPoint GetOrientation()
+        public CardinalPointEnum GetOrientation()
         {
-            return CardinalPoint.Oeste;
+            return CardinalPointEnum.Oeste;
         }
 
         public Point TryMoveAhead(Map map, Point point)

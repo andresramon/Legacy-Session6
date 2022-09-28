@@ -1,16 +1,47 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MarsRover
 {
-    public enum CardinalPoint
+    public class CardinalPoint
     {
-        Norte = 'N',
-        Oeste = 'O',
-        Sur = 'S',
-        Este = 'E'
+        private static Dictionary<string, CardinalPointEnum> cardinalDictionary = new Dictionary<string, CardinalPointEnum>()
+        {
+            {
+                "N", CardinalPointEnum.Norte
+            },
+            {
+                "S", CardinalPointEnum.Sur
+            },
+            {
+                "O", CardinalPointEnum.Oeste
+            },
+            {
+                "E", CardinalPointEnum.Este
+            }
+        };
+
+        public static ICardinal GetCardinalFromString(string cardinalString)
+        {
+            cardinalDictionary.TryGetValue(cardinalString, out CardinalPointEnum currentOrientation);
+            return CardinalPoint.GetCardinal(currentOrientation);
+        }
+
+        public static ICardinal GetCardinal(CardinalPointEnum cardinalPointEnum)
+        {
+            switch (cardinalPointEnum)
+            {
+                case CardinalPointEnum.Norte:
+                    return new Norte();
+                case CardinalPointEnum.Oeste:
+                    return new Oeste();
+                case CardinalPointEnum.Sur:
+                    return new Sur();
+                case CardinalPointEnum.Este:
+                    return new Este();
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(cardinalPointEnum), cardinalPointEnum, null);
+            }
+        }
     }
 }

@@ -2,9 +2,9 @@
 {
     public class Este : ICardinal
     {
-        public CardinalPoint GetOrientation()
+        public CardinalPointEnum GetOrientation()
         {
-            return CardinalPoint.Este;
+            return CardinalPointEnum.Este;
         }
 
         public Point TryMoveAhead(Map map, Point point)

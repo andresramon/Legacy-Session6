@@ -2,9 +2,9 @@
 {
     public class Sur : ICardinal
     {
-        public CardinalPoint GetOrientation()
+        public CardinalPointEnum GetOrientation()
         {
-            return CardinalPoint.Sur;
+            return CardinalPointEnum.Sur;
         }
 
         public Point TryMoveAhead(Map map, Point point)
