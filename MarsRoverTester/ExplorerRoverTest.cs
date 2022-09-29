@@ -74,8 +74,8 @@ namespace MarsRoverTester
         [TestCase("5 5\n0 1 N\nAADADRIA\n", "2 4 E")]
         public void OrderToRover(string order, string expectedPosition)
         {
-            ExplorerRover rover = new ExplorerRover();
-            Assert.AreEqual(expectedPosition, rover.ProcessCommand(order));
+            RoverAPI roverApi = new RoverAPI();
+            Assert.AreEqual(expectedPosition, roverApi.ProcessCommand(order));
         }
 
 

@@ -18,37 +18,22 @@ namespace MarsRover
         {
             this.factory = factory;
         }
-        public ExplorerRover(Point initialPoint, CardinalPointEnum iniOrientation, Map map)
+        public ExplorerRover(Point initialPoint, CardinalPointEnum iniOrientation, Map map) : this()
         {
             currentOrientationState = CardinalPoint.GetCardinal(iniOrientation);
             point = initialPoint;
             this.map = map;
         }
 
-        public string ProcessCommand(string command)
-        {
-            string[] inputLines = command.Split('\n');
-            map = Map.CreateMapFromDimension(inputLines[0]);
-            SetInitialPositionOrientation(inputLines[1]);
-            ProcessMovement(inputLines[2]);
-            
-            return PrintPosition();
-        }
-
-        private void ProcessMovement(string movements)
+        public string ProcessMovement(string movements)
         {
             foreach (char singleMove in movements)
             {
                 ICommand command = factory.GetCommand(singleMove.ToString(),this);
                 command.Execute();
             }
-        }
 
-        private void SetInitialPositionOrientation(string initialPositionOrientation)
-        {
-            string[] inputPositionOrientation = initialPositionOrientation.Split(' ');
-            point = new Point(int.Parse(inputPositionOrientation[0]), int.Parse(inputPositionOrientation[1]));
-            currentOrientationState = CardinalPoint.GetCardinalFromString(inputPositionOrientation[2]);
+            return PrintPosition();
         }
 
         public string MoveAhead()
