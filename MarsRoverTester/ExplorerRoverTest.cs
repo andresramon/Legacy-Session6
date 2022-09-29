@@ -82,9 +82,18 @@ namespace MarsRoverTester
         private static ExplorerRover InitializeExplorer(int iniX, int iniY, CardinalPointEnum iniOrientation)
         {
             Point point = new Point(iniX, iniY);
-            Map map = new Map(2, 3);
-            ExplorerRover rover = new ExplorerRover(point, iniOrientation, map);
+            LandMap landMap = new LandMap(2, 3);
+            ExplorerRover rover = new ExplorerRover(point, iniOrientation, landMap);
             return rover;
         }
+        
+        [TestCase("5 5\n5 5 N\nA\n", "5 6 N Flying")]
+        public void OrderToFlightRover(string order, string expectedPosition)
+        {
+            RoverAPI roverApi = new RoverAPI();
+
+            Assert.AreEqual(expectedPosition, roverApi.ProcessCommand(order, true));
+        }
+
     }
 }

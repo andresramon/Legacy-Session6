@@ -43,9 +43,13 @@
     <Compile Include="CardinalPointEnum.cs" />
     <Compile Include="CommandFactory.cs" />
     <Compile Include="Este.cs" />
+    <Compile Include="FlightMap.cs" />
+    <Compile Include="FlyerRover.cs" />
     <Compile Include="ICardinal.cs" />
     <Compile Include="ICommand.cs" />
-    <Compile Include="Map.cs" />
+    <Compile Include="IMap.cs" />
+    <Compile Include="IRover.cs" />
+    <Compile Include="LandMap.cs" />
     <Compile Include="ExplorerRover.cs" />
     <Compile Include="MoveAhead.cs" />
     <Compile Include="MoveRear.cs" />

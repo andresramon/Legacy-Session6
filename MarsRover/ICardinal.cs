@@ -2,13 +2,10 @@
 {
     public interface ICardinal
     {
-        Point TryMoveAhead(Map map, Point point);
-        Point TryMoveRear(Map map, Point point);
+        Point TryMoveAhead(IMap map, Point point);
+        Point TryMoveRear(IMap map, Point point);
         ICardinal RotateLeft();
         ICardinal RotateRight();
-
         CardinalPointEnum GetOrientation();
-        
-        
     }
 }

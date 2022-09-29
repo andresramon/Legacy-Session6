@@ -7,7 +7,7 @@
             return CardinalPointEnum.Este;
         }
 
-        public Point TryMoveAhead(Map map, Point point)
+        public Point TryMoveAhead(IMap map, Point point)
         {
             if (map.IsNotLimitEast(point.X))
             {
@@ -17,7 +17,7 @@
             return point;
         }
 
-        public Point TryMoveRear(Map map, Point point)
+        public Point TryMoveRear(IMap map, Point point)
         {
             if (map.IsNotLimitWest(point.X))
             {

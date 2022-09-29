@@ -3,10 +3,10 @@ using System.Collections.Generic;
 
 namespace MarsRover
 {
-    public class ExplorerRover 
+    public class ExplorerRover : IRover
     {
         private ICardinal currentOrientationState;
-        private Map map;
+        private IMap map;
         private Point point;
         private CommandFactory factory;
 
@@ -18,7 +18,7 @@ namespace MarsRover
         {
             this.factory = factory;
         }
-        public ExplorerRover(Point initialPoint, CardinalPointEnum iniOrientation, Map map) : this()
+        public ExplorerRover(Point initialPoint, CardinalPointEnum iniOrientation, IMap map) : this()
         {
             currentOrientationState = CardinalPoint.GetCardinal(iniOrientation);
             point = initialPoint;

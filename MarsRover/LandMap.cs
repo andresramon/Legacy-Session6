@@ -1,11 +1,11 @@
 ﻿namespace MarsRover
 {
-    public class Map
+    public class LandMap : IMap
     {
         private readonly int _maxX;
         private readonly int _maxY;
 
-        public Map(int maxX, int maxY)
+        public LandMap(int maxX, int maxY)
         {
             _maxX = maxX;
             _maxY = maxY;
@@ -31,10 +31,10 @@
             return y > 0;
         }
 
-        public static Map CreateMapFromDimension(string dimensionMap)
+        public static IMap CreateMapFromDimension(string dimensionMap)
         {
             string[] inputDimensions = dimensionMap.Split(' ');
-            return new Map(int.Parse(inputDimensions[0]), int.Parse(inputDimensions[1]));
+            return new LandMap(int.Parse(inputDimensions[0]), int.Parse(inputDimensions[1]));
         }
     }
 }
