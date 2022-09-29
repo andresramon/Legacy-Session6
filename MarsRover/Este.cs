@@ -11,7 +11,7 @@
         {
             if (map.IsNotLimitEast(point.X))
             {
-                point.X++;
+                point.X++; 
             }
 
             return point;
